@@ -3,15 +3,15 @@ class Course:
         self.name = name
         self.semester = semester
         self.section_timings = section_timings
-        self.section_integers = self.get_sections_integers(section_timings)
+        self.section_integers = self.get_sections_integers()
 # note to self:
 # timings = [[name], [day start end], [day start end]]
-    def get_sections_integers():
-        sections_integers = []
-        for index1 in range(1, len(self.section_timings)):
+    def get_sections_integers(self):
+        section_integers = []
+        for index1 in range(len(self.section_timings)):
             meetings = []
-            for index2 in range(1, len(self.section_timings[index])):
-                unconverted = self.section_timings[index1]
+            for index2 in range(1, len(self.section_timings[index1])):
+                unconverted = self.section_timings[index1][index2]
                 weekday_int = self.weekday_to_number(unconverted[0])
                 start_time = weekday_int*10000 + unconverted[1]
                 end_time = weekday_int*10000 + unconverted[2]
@@ -43,11 +43,10 @@ class Course:
             print(self.name + " is not a year-long course")
             raise ValueError
 
-    def doesnt_overlap(section1_times, section2_times):
+    def overlaps(section1_times, section2_times):
         for meeting1 in section1_times:
             for meeting2 in section2_times:
         #if one starts/ends during the other or they take place at the exact same timings
                 if(meeting1[0] < meeting2[0] < meeting1[1]) or (meeting1[0] < meeting2[1] < meeting1[1]) or (meeting1[0] == meeting2[0] and meeting1[1] == meeting2[1]):
-                    return False
-                else:
                     return True
+        return False
