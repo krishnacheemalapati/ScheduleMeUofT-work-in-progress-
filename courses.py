@@ -44,6 +44,9 @@ class Course:
             raise ValueError
 
     def overlaps(section1_times, section2_times):
+      if section1_times == [] or section2_times == []:
+        return False
+
         for meeting1 in section1_times:
             for meeting2 in section2_times:
         #if one starts/ends during the other or they take place at the exact same timings
